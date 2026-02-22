@@ -3,7 +3,7 @@ html {
 }
 /* --- GLOBALNE ZMIENNE (Design System) --- */
 :root {
-    --bg-color: #E5E5E5;        
+    --bg-color: #FFFFFF;        /* Zmienione z #E5E5E5 na czystą biel, by bloki odcięły się od tła */      
     --text-color: #111111;      
     --accent-color: #FF2A00;    
     --line-color: #111111;      
