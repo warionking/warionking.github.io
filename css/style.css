@@ -40,18 +40,12 @@ body {
 /* --- NAGŁÓWEK --- */
 .main-header {
     width: 100%;
-    height: auto; 
     display: flex;
-    flex-direction: column; 
-    justify-content: center;
-    align-items: center;    
-    padding: 40px 0 0 0; /* Górny margines nad logo */
-    background: transparent; 
-    border: none;
-    
-    /* KLUCZOWA ZMIANA: Usuwamy 'absolute' na rzecz 'relative' */
-    position: relative;      
-    z-index: 100; /* Upewnia się, że menu będzie na wierzchu */
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0 20px 0;
+    position: relative; 
+    z-index: 100;
 }
 
 .logo-img { 
@@ -85,116 +79,83 @@ body {
 }
 .desktop-menu a:hover::after { width: 100%; }
 
-/* --- HERO EDITORIAL --- */
+/* --- HERO EDITORIAL - NAPRAWIONY --- */
 .hero-editorial {
-    display: grid;
-    grid-template-columns: 40% 1fr;
-    gap: 0;
-
-    margin-top: -50px; 
-    padding-top: 100px; 
-    padding-bottom: 50px;
-    padding-left: 50px;
-    padding-right: 0; /* <--- KLUCZOWA ZMIANA: Zmieniamy na 0 */
-
-    background-color: var(--bg-color);
-    border-radius: var(--border-radius);
+    display: flex;
+    align-items: stretch;
+    margin-top: 40px; 
+    background-color: var(--bg-color); 
+    border-radius: var(--border-radius); 
     box-shadow: 0 25px 70px rgba(0, 0, 0, 0.08);
+    overflow: hidden; /* To musi zostać, by "przyciąć" zdjęcie do zaokrągleń */
+    position: relative;
+    padding: 0 !important; /* Wymuszamy brak odstępów wewnątrz */
 }
 
 .hero-text-side {
+    flex: 0 0 50%; /* Zwiększamy nieco miejsce na tekst do 50% */
     background-color: var(--bg-color);
-    
-    /* KLUCZOWA ZMIANA: Kolejność to: góra, prawo, dół, lewo (0) */
-    padding: 40px 40px 40px 0; 
-    
+    padding: 50px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    border: none; 
-}
-
-.hero-img-side {
-    position: relative;
-    height: 100%; 
-    overflow: hidden;
-    border: none; 
-    margin-bottom: 40px;
-    
-    /* KLUCZOWA ZMIANA: 30px z lewej, 0 z prawej */
-    border-radius: 30px 0 0 30px; 
+    justify-content: center;
+    min-width: 0; /* Ważne: zapobiega "rozpychaniu" flexboxa przez długie słowa */
 }
 
 .editorial-title {
-    font-family: var(--font-heading);
-    font-size: 5rem; 
-    line-height: 0.9;
+    font-family: var(--font-heading) !important;
+    font-size: clamp(3rem, 6vw, 5.5rem); /* Tekst będzie rósł i malał zależnie od ekranu */
+    line-height: 0.85;
     text-transform: uppercase;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     letter-spacing: -2px;
+    font-weight: 700;
+    color: var(--text-color);
+    word-wrap: break-word; /* Zabezpieczenie przed wychodzeniem tekstu */
 }
+
 .outlined-text {
     color: transparent;
-    -webkit-text-stroke: 1px var(--text-color);
+    -webkit-text-stroke: 1.5px var(--text-color);
     display: block;
 }
-.editorial-desc {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 40px;
-    font-family: var(--font-body);
-    text-align: justify;
-    max-width: 90%;
+
+.hero-img-side {
+    flex: 1; 
+    position: relative;
+    display: flex; /* To usunie biały pasek po prawej stronie zdjęcia */
 }
-.editorial-btn {
-    display: inline-block;
-    padding: 20px 0;
-    border-top: 2px solid var(--text-color);
-    border-bottom: 2px solid var(--text-color);
-    color: var(--text-color);
-    text-decoration: none;
-    font-family: var(--font-heading);
-    text-transform: uppercase;
-    font-size: 1.2rem;
-    transition: 0.3s;
-    width: 100%;
-    text-align: center;
-    border-radius: 10px; 
-}
-.editorial-btn:hover { background: var(--text-color); color: white; }
 
 .editorial-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%);
-    transition: 0.5s;
-    
-    /* KLUCZOWA ZMIANA: 30px z lewej, 0 z prawej */
-    border-radius: 30px 0 0 30px; 
+    display: block;
 }
-.hero-img-side:hover .editorial-img { filter: grayscale(0%); transform: scale(1.05); }
 
+/* --- PIONOWY PASEK NA ZDJĘCIU --- */
 .vertical-stripe {
     position: absolute;
-    top: 0; left: 20px;
-    width: 40px; height: 100%;
+    top: 0; 
+    left: 0; /* Zmień z 20px na 0 */
+    width: 45px; 
+    height: 100%;
     background-color: var(--accent-color);
-    color: var(--accent-color);
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.vertical-stripe span {
     writing-mode: vertical-rl;
     text-orientation: mixed;
     transform: rotate(180deg);
-}
-.vertical-stripe span {
+    white-space: nowrap;
     color: black;
     font-family: var(--font-heading);
     font-weight: bold;
-    font-size: 1.2rem;
-    white-space: nowrap;
+    text-transform: uppercase;
     letter-spacing: 2px;
 }
 .top-meta {
@@ -903,21 +864,32 @@ body.spotlight-mode .service-row:not(.active-row) {
     
     /* 1. NAGŁÓWEK I MENU */
     .main-header {
-        padding-top: 20px;
-    }
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Logo po lewej, menu po prawej */
+    align-items: center;
+    padding: 20px 40px;
+    position: relative; /* Ważne, by nie uciekał */
+    z-index: 10;
+    background: transparent; /* Możesz zmienić na kolor tła, jeśli chcesz odciąć menu */
+}
     .logo-img {
         height: 150px; /* Znacznie mniejsze logo na telefonie */
         margin-bottom: 20px;
     }
-    .desktop-menu {
-        flex-wrap: wrap; /* Pozwala linkom zawijać się do nowej linii */
-        justify-content: center;
-        gap: 15px;
-        padding: 0 10px;
-    }
-    .desktop-menu a {
-        font-size: 0.9rem; /* Mniejsza czcionka w menu */
-    }
+ .desktop-menu {
+    display: flex;
+    gap: 30px;
+}
+
+.desktop-menu a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
 
     /* 2. SEKCJA HERO (Przestrzeń, Detal, Chwila) */
     .hero-editorial {
