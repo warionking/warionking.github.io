@@ -43,9 +43,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 0 20px 0;
-    position: relative; 
+    padding: 30px 0;
+    position: relative;
     z-index: 100;
+    background: transparent; /* Header jest przezroczysty, widać tylko nasz pasek */
 }
 
 .logo-img { 
@@ -57,18 +58,30 @@ body {
 
 .logo-img { height: 290px; width: auto; display: block; margin-bottom: 0px; }
 
-.desktop-menu { display: flex; gap:45px; }
+/* --- POPRAWIONY NAVBAR (SZARY Z CIENIEM) --- */
+.desktop-menu {
+    display: flex;
+    gap: 35px;
+    background-color: #E0E0E0; /* Szary pasek */
+    padding: 12px 40px;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Cień */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-top: -10px; /* Lekkie podciągnięcie do góry pod logo */
+    transition: all 0.3s ease;
+}
+
 .desktop-menu a {
     text-decoration: none;
-    color: var(--text-color);
+    color: #111111;
     font-family: var(--font-heading);
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: bold;
     position: relative;
-    transition: 0.3s;
 }
+
 .desktop-menu a::after {
     content: '';
     position: absolute;
@@ -77,6 +90,7 @@ body {
     background-color: var(--accent-color);
     transition: width 0.3s;
 }
+
 .desktop-menu a:hover::after { width: 100%; }
 
 /* --- HERO EDITORIAL - NAPRAWIONY --- */
@@ -879,16 +893,49 @@ body.spotlight-mode .service-row:not(.active-row) {
     }
  .desktop-menu {
     display: flex;
-    gap: 30px;
+    gap: 35px;
+    background-color: #E0E0E0; /* Jasnoszary kolor paska */
+    padding: 15px 45px;
+    border-radius: 50px; /* Zaokrąglone końce paska */
+    
+    /* Miękki, nowoczesny cień */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
+    
+    /* Opcjonalnie: bardzo delikatne obramowanie, by oddzielić go od tła strony */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Dodatkowy efekt: pasek lekko się unosi, gdy na niego najedziesz */
+.desktop-menu:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
 .desktop-menu a {
     text-decoration: none;
-    color: var(--text-color);
+    color: #333333; /* Ciemnoszary tekst dla lepszego kontrastu */
     font-family: var(--font-heading);
+    font-size: 1rem;
     text-transform: uppercase;
-    font-weight: 400;
     letter-spacing: 1px;
+    font-weight: bold;
+    position: relative;
+    transition: 0.3s;
+}
+
+/* Zmieniamy kolor podkreślenia na Twój pomarańczowy, żeby nawiązać do reszty */
+.desktop-menu a::after {
+    content: '';
+    position: absolute;
+    width: 0; 
+    height: 2px;
+    bottom: -5px; 
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s;
 }
 
     /* 2. SEKCJA HERO (Przestrzeń, Detal, Chwila) */
