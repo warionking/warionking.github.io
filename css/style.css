@@ -146,14 +146,14 @@ body {
 
 .editorial-title {
     font-family: var(--font-heading) !important;
-    font-size: clamp(3rem, 6vw, 5.5rem); /* Tekst będzie rósł i malał zależnie od ekranu */
-    line-height: 0.85;
+    font-size: clamp(3rem, 6vw, 5.5rem); 
+    line-height: 1.0;        /* POPRAWA: Zwiększono z 0.85 na 1.1, by słowa nie wchodziły na siebie */
     text-transform: uppercase;
     margin-bottom: 25px;
     letter-spacing: -2px;
     font-weight: 700;
     color: var(--text-color);
-    word-wrap: break-word; /* Zabezpieczenie przed wychodzeniem tekstu */
+    word-wrap: break-word; 
 }
 
 .outlined-text {
@@ -935,7 +935,8 @@ body.spotlight-mode .service-row:not(.active-row) {
         
         width: 90%;              /* Bezpieczna szerokość */
         max-width: 400px;        
-        margin: 10px auto;       
+        /* POPRAWA: Ujemny margines górny (-30px) zlikwiduje ogromną przerwę pod logiem na telefonach */
+        margin: -30px auto 20px auto;       
         
         /* KLUCZOWE: Pozwala na przewijanie zawartości, która wychodzi poza pasek */
         overflow-x: auto;
@@ -976,26 +977,35 @@ body.spotlight-mode .service-row:not(.active-row) {
     transition: width 0.3s;
 }
 
-    /* 2. SEKCJA HERO (Przestrzeń, Detal, Chwila) */
+   /* 2. SEKCJA HERO (Przestrzeń, Detal, Chwila) */
     .hero-editorial {
-        flex-direction: column; /* POPRAWA: Wymusza układ pionowy tekstu i zdjęcia */
+        flex-direction: column; 
         margin-top: 20px; 
-        padding: 0 !important; /* Usunięto wewnętrzne marginesy dla spójności ze zdjęciem */
+        padding: 0 !important; 
     }
     
     .hero-text-side {
-        flex: none;             /* POPRAWA: Resetuje 50% szerokości z wersji na komputer */
+        flex: none;             
         width: 100%;
-        padding: 30px 20px;     /* Przeniesienie paddingów do samego tekstu */
+        padding: 30px 20px;     
+        text-align: center;      /* POPRAWA: Wyśrodkowanie całego tekstu w bloku */
+        align-items: center;     /* POPRAWA: Wyśrodkowanie elementów dla Flexboxa */
+    }
+    
+    .top-meta {
+        justify-content: center; /* POPRAWA: Wyśrodkowanie małego napisu EST. 2025 nad tytułem */
     }
     
     .editorial-title {
         font-size: 3.5rem; 
+        text-align: center;      /* POPRAWA: Wymuszone wyśrodkowanie nagłówka H1 */
     }
     
     .editorial-desc {
         max-width: 100%;
-        text-align: left; 
+        text-align: center;      /* POPRAWA: Zmienione z left na center dla opisu */
+        margin-left: auto;       /* Pomaga w idealnym wyśrodkowaniu bloku tekstu */
+        margin-right: auto;
     }
     
     .vertical-stripe {
@@ -1013,10 +1023,22 @@ body.spotlight-mode .service-row:not(.active-row) {
         border-radius: 20px;
     }
 
-    /* 4. SEKCJA USŁUGI I CENNIK */
+  /* 4. SEKCJA USŁUGI I CENNIK */
     .section-title {
         font-size: 2rem;
     }
+    
+    /* POPRAWA: Centrowanie tekstów w usługach (Architektura, Śluby, itd.) na telefonie */
+    .service-text-col {
+        align-items: center;     /* Wyśrodkowuje przycisk i zawartość bloku */
+        text-align: center;      /* Wyśrodkowuje sam tekst (nagłówki i akapity) */
+        padding: 40px 20px;      /* Zmniejszone marginesy wewnętrzne dla lepszego wyglądu na mobile */
+    }
+
+    .outline-btn-small {
+        align-self: center;      /* Zmusza przycisk do stanięcia na środku (nadpisuje flex-start) */
+    }
+
     .pricing-grid {
         gap: 20px;
         background: transparent;
@@ -1029,14 +1051,23 @@ body.spotlight-mode .service-row:not(.active-row) {
         padding: 30px 20px;
     }
 
-    /* 5. SEKCJA O NAS */
+   /* 5. SEKCJA O NAS */
     .about-section {
         padding: 40px 20px;
-        margin: 40px 10px; /* Mniejsze marginesy zewnętrzne */
+        margin: 40px 10px;       /* Mniejsze marginesy zewnętrzne */
         border-radius: 20px;
     }
+    
     .about-image {
-        height: 250px; /* Niższe zdjęcie */
+        height: 250px;           /* Niższe zdjęcie */
+    }
+
+    /* POPRAWA: Wyśrodkowanie całej zawartości "O NAS" na telefonach */
+    .about-text {
+        text-align: center;      /* Centruje akapity (p) i nagłówki */
+        display: flex;
+        flex-direction: column;
+        align-items: center;     /* Zmusza podkreślenie (border-bottom) pod "O NAS" do wyśrodkowania */
     }
 
     /* 6. FORMULARZ KONTAKTOWY */
