@@ -1,17 +1,31 @@
 html {
     scroll-behavior: smooth;
 }
-/* --- GLOBALNE ZMIENNE (Design System: Clean, Soft & Organic) --- */
+/* --- GLOBALNE ZMIENNE (Design System) --- */
 :root {
-    --bg-color: #F4F4F4;        
+    --bg-color: #E5E5E5;        
     --text-color: #111111;      
     --accent-color: #FF2A00;    
-    --line-color: #000000;      
+    --line-color: #111111;      
     
-    --border-radius: 24px;      
+    --border-radius: 24px;      /* PRZYWRÓCONE ZAOKRĄGLENIA */
     
     --font-heading: 'Oswald', sans-serif; 
     --font-body: 'Lato', sans-serif;
+
+    /* FLUID TYPOGRAPHY (Skaluje się płynnie od iPhone'a do 27" 4K) */
+    --text-sm: clamp(0.875rem, 0.8vw + 0.5rem, 1rem);
+    --text-base: clamp(1rem, 1vw + 0.5rem, 1.125rem);
+    --text-lg: clamp(1.25rem, 1.5vw + 1rem, 1.5rem);
+    --text-h3: clamp(1.5rem, 2vw + 1rem, 2.5rem);
+    --text-h2: clamp(2rem, 3vw + 1rem, 3.5rem);
+    --text-hero: clamp(3rem, 6vw + 1rem, 6.5rem);
+
+    /* FLUID SPACING (Płynne marginesy i paddingi) */
+    --space-sm: clamp(10px, 1vw + 5px, 20px);
+    --space-md: clamp(20px, 2vw + 10px, 40px);
+    --space-lg: clamp(40px, 4vw + 20px, 80px);
+    --space-xl: clamp(60px, 6vw + 30px, 120px);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -43,10 +57,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px 0;
+    padding: 20px 0 10px 0; 
     position: relative;
     z-index: 100;
-    background: transparent; /* Header jest przezroczysty, widać tylko nasz pasek */
+    background: transparent;
+    
+    /* TO USUWA MIGAJĄCY KURSOR: */
+    user-select: none;      /* Blokuje zaznaczanie "pustego" tekstu */
+    cursor: default;        /* Wymusza zwykłą strzałkę zamiast kursora tekstowego */
 }
 
 .logo-img { 
@@ -58,16 +76,25 @@ body {
 
 .logo-img { height: 290px; width: auto; display: block; margin-bottom: 0px; }
 
-/* --- POPRAWIONY NAVBAR (SZARY Z CIENIEM) --- */
+/* --- POPRAWIONY NAVBAR (PODĄŻAJĄCY) --- */
 .desktop-menu {
+    position: sticky;       /* Pasek zacznie podążać dopiero po dotknięciu góry */
+    top: 20px;              /* Odstęp od góry ekranu po "przyklejeniu" */
+    z-index: 9999;
+    
     display: flex;
-    gap: 35px;
-    background-color: #E0E0E0; /* Szary pasek */
-    padding: 12px 40px;
+    gap: 55px;               /* Zwiększyłem z 35px na 55px */
+    background-color: rgba(224, 224, 224, 0.9); 
+    padding: 12px 50px;      /* Zwiększyłem też boczny padding paska dla balansu */
     border-radius: 50px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Cień */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     border: 1px solid rgba(0, 0, 0, 0.05);
-    margin-top: -10px; /* Lekkie podciągnięcie do góry pod logo */
+    
+    /* KLUCZOWE DLA WYŚRODKOWANIA: */
+    width: fit-content;     /* Pasek zwęża się do zawartości */
+    margin: 0 auto 40px auto; /* Centruje w poziomie i daje odstęp od spodu */
+    
+    backdrop-filter: blur(8px);
     transition: all 0.3s ease;
 }
 
@@ -887,24 +914,25 @@ body.spotlight-mode .service-row:not(.active-row) {
     z-index: 10;
     background: transparent; /* Możesz zmienić na kolor tła, jeśli chcesz odciąć menu */
 }
-    .logo-img {
-        height: 150px; /* Znacznie mniejsze logo na telefonie */
-        margin-bottom: 20px;
-    }
- .desktop-menu {
+    .logo-img { 
+    height: 180px; /* Nieco mniejsze logo wygląda bardziej premium */
+    width: auto; 
+    display: block; 
+    margin: 0 auto; /* Gwarantuje wycentrowanie logo */
+}
+.desktop-menu {
     display: flex;
-    gap: 35px;
-    background-color: #E0E0E0; /* Jasnoszary kolor paska */
-    padding: 15px 45px;
-    border-radius: 50px; /* Zaokrąglone końce paska */
-    
-    /* Miękki, nowoczesny cień */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
-    
-    /* Opcjonalnie: bardzo delikatne obramowanie, by oddzielić go od tła strony */
+    justify-content: center;
+    gap: 12px;               /* Drastycznie mniejszy odstęp dla iPhone'a */
+    background-color: #E0E0E0;
+    padding: 10px 15px;      /* Ciasny padding, by pasek nie wychodził poza ekran */
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     border: 1px solid rgba(0, 0, 0, 0.05);
     
-    margin-top: 10px;
+    width: 94%;              /* Pasek dopasowuje się do szerokości telefonu */
+    max-width: 380px;        /* Maksymalna szerokość dla iPhone 14 Pro */
+    margin: 10px auto;       /* Centrowanie na środku ekranu */
     transition: all 0.3s ease;
 }
 
