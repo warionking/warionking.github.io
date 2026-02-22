@@ -921,38 +921,39 @@ body.spotlight-mode .service-row:not(.active-row) {
     margin: 0 auto; /* Gwarantuje wycentrowanie logo */
 }
 .desktop-menu {
-    display: flex;
-    justify-content: center;
-    gap: 12px;               /* Drastycznie mniejszy odstęp dla iPhone'a */
-    background-color: #E0E0E0;
-    padding: 10px 15px;      /* Ciasny padding, by pasek nie wychodził poza ekran */
-    border-radius: 50px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    
-    width: 94%;              /* Pasek dopasowuje się do szerokości telefonu */
-    max-width: 380px;        /* Maksymalna szerokość dla iPhone 14 Pro */
-    margin: 10px auto;       /* Centrowanie na środku ekranu */
-    transition: all 0.3s ease;
-}
+        display: flex;
+        justify-content: center;
+        align-items: center;     /* Nowość: wymusza idealne centrowanie w pionie */
+        gap: clamp(4px, 1.5vw, 12px); /* Nowość: elastyczny odstęp, maleje na węższych ekranach */
+        background-color: #E0E0E0;
+        padding: 10px 12px;      /* Minimalnie węższy padding boczny */
+        border-radius: 50px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        
+        width: 94%;              
+        max-width: 400px;        
+        margin: 10px auto;       
+        transition: all 0.3s ease;
+    }
 
-/* Dodatkowy efekt: pasek lekko się unosi, gdy na niego najedziesz */
-.desktop-menu:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-}
+    .desktop-menu:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
 
-.desktop-menu a {
-    text-decoration: none;
-    color: #333333; /* Ciemnoszary tekst dla lepszego kontrastu */
-    font-family: var(--font-heading);
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: bold;
-    position: relative;
-    transition: 0.3s;
-}
+    .desktop-menu a {
+        text-decoration: none;
+        color: #333333; 
+        font-family: var(--font-heading);
+        font-size: clamp(0.65rem, 2.5vw, 0.85rem); /* Nowość: płynnie malejący font na małych ekranach */
+        text-transform: uppercase;
+        letter-spacing: 0.5px;   /* Zmniejszone z 1px, żeby zaoszczędzić miejsce */
+        font-weight: bold;
+        position: relative;
+        transition: 0.3s;
+        white-space: nowrap;     /* Nowość: zapobiega zawijaniu słów do nowej linii */
+    }
 
 /* Zmieniamy kolor podkreślenia na Twój pomarańczowy, żeby nawiązać do reszty */
 .desktop-menu a::after {
