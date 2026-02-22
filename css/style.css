@@ -922,11 +922,10 @@ body.spotlight-mode .service-row:not(.active-row) {
 }
 .desktop-menu {
         display: flex;
-        justify-content: center;
-        align-items: center;     /* Nowość: wymusza idealne centrowanie w pionie */
-        gap: clamp(4px, 1.5vw, 12px); /* Nowość: elastyczny odstęp, maleje na węższych ekranach */
+        justify-content: space-between; /* POPRAWA: Rozciąga linki równomiernie na całą szerokość paska */
+        align-items: center;     
         background-color: #E0E0E0;
-        padding: 10px 12px;      /* Minimalnie węższy padding boczny */
+        padding: 12px 22px;      /* POPRAWA: Większy padding boczny, by skrajne linki nie wchodziły na zaokrąglenia */
         border-radius: 50px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         border: 1px solid rgba(0, 0, 0, 0.05);
@@ -946,13 +945,13 @@ body.spotlight-mode .service-row:not(.active-row) {
         text-decoration: none;
         color: #333333; 
         font-family: var(--font-heading);
-        font-size: clamp(0.65rem, 2.5vw, 0.85rem); /* Nowość: płynnie malejący font na małych ekranach */
+        font-size: clamp(0.75rem, 3.5vw, 0.95rem); /* POPRAWA: Zwiększona czcionka, by lepiej wypełnić pasek */
         text-transform: uppercase;
-        letter-spacing: 0.5px;   /* Zmniejszone z 1px, żeby zaoszczędzić miejsce */
+        letter-spacing: 0px;     /* POPRAWA: Wyzerowany letter-spacing pozwala na większą czytelną literę */
         font-weight: bold;
         position: relative;
         transition: 0.3s;
-        white-space: nowrap;     /* Nowość: zapobiega zawijaniu słów do nowej linii */
+        white-space: nowrap;     
     }
 
 /* Zmieniamy kolor podkreślenia na Twój pomarańczowy, żeby nawiązać do reszty */
