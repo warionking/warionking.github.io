@@ -969,22 +969,26 @@ body.spotlight-mode .service-row:not(.active-row) {
 
     /* 2. SEKCJA HERO (Przestrzeń, Detal, Chwila) */
     .hero-editorial {
-        grid-template-columns: 1fr; /* Elementy układają się jeden pod drugim */
-        margin-top: 20px; /* Usuwamy efekt wjeżdżania pod menu */
-        padding: 30px 20px; /* Znacznie mniejsze marginesy wewnętrzne */
-    }
-    .hero-text-side {
-        padding: 0 0 30px 0; /* Resetujemy marginesy tekstu */
-    }
-    .editorial-title {
-        font-size: 3.5rem; /* Mniejszy tytuł, żeby zmieścił się na ekranie */
-    }
-    .editorial-desc {
-        max-width: 100%;
-        text-align: left; /* Na telefonie lepiej czyta się tekst do lewej */
+        flex-direction: column; /* POPRAWA: Wymusza układ pionowy tekstu i zdjęcia */
+        margin-top: 20px; 
+        padding: 0 !important; /* Usunięto wewnętrzne marginesy dla spójności ze zdjęciem */
     }
     
-    /* Ukrywamy pionowy pasek, na telefonie zajmuje cenne miejsce */
+    .hero-text-side {
+        flex: none;             /* POPRAWA: Resetuje 50% szerokości z wersji na komputer */
+        width: 100%;
+        padding: 30px 20px;     /* Przeniesienie paddingów do samego tekstu */
+    }
+    
+    .editorial-title {
+        font-size: 3.5rem; 
+    }
+    
+    .editorial-desc {
+        max-width: 100%;
+        text-align: left; 
+    }
+    
     .vertical-stripe {
         display: none; 
     }
