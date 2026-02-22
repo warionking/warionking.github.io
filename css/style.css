@@ -794,11 +794,11 @@ body.spotlight-mode .service-row:not(.active-row) {
     padding: 40px 30px;
     display: flex;
     flex-direction: column;
+    transition: 0.3s ease;
     
-    /* Pozycjonowanie relatywne jest potrzebne, by z-index zadziałał na hoverze */
-    position: relative; 
-    z-index: 1;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Płynna, elastyczna animacja */
+    /* KLUCZOWE ZMIANY: */
+    text-align: center;  /* Centruje tekst */
+    align-items: center; /* Centruje przycisk na dole */
 }
 
 /* --- EFEKT NAJECHANIA (WYPUKLENIE + POŚWIATA) --- */
@@ -845,15 +845,20 @@ body.spotlight-mode .service-row:not(.active-row) {
     line-height: 1.6;
     margin-bottom: 10px;
     color: #444;
-    padding-left: 15px;
-    position: relative;
+    
+    /* KLUCZOWE ZMIANY: */
+    padding-left: 0;     /* Usuwamy sztywne wcięcie z lewej */
+    text-align: center;  /* Wyśrodkowanie tekstu punktów */
 }
 
 .pricing-features li::before {
     content: "—";
-    position: absolute;
-    left: 0;
     color: var(--accent-color);
+    
+    /* KLUCZOWE ZMIANY: */
+    position: relative; /* Zmieniamy z absolutnej */
+    left: auto;         /* Usuwamy przypięcie do lewej krawędzi */
+    margin-right: 8px;  /* Dodajemy mały odstęp, żeby myślnik nie dotykał liter */
 }
 
 .pricing-disclaimer {
