@@ -41,18 +41,24 @@ body {
 .main-header {
     width: 100%;
     height: auto; 
-    min-height: 200px; 
     display: flex;
     flex-direction: column; 
     justify-content: center;
     align-items: center;    
-    padding: 0px 0; 
+    padding: 40px 0 0 0; /* Górny margines nad logo */
     background: transparent; 
     border: none;
-    position: absolute;      
-    top: 0;
-    left: 0;
-    z-index: 100;
+    
+    /* KLUCZOWA ZMIANA: Usuwamy 'absolute' na rzecz 'relative' */
+    position: relative;      
+    z-index: 100; /* Upewnia się, że menu będzie na wierzchu */
+}
+
+.logo-img { 
+    height: 250px; /* Minimalnie mniejsze, by złapać lepsze proporcje */
+    width: auto; 
+    display: block; 
+    margin-bottom: 40px; /* Dystans między logo a nawigacją */
 }
 
 .logo-img { height: 290px; width: auto; display: block; margin-bottom: 0px; }
@@ -85,11 +91,11 @@ body {
     grid-template-columns: 40% 1fr;
     gap: 0;
 
-    /* KLUCZOWA ZMIANA: Symetryczne marginesy */
-    padding-top: 390px; 
+    margin-top: -50px; 
+    padding-top: 100px; 
     padding-bottom: 50px;
-    padding-left: 50px;  /* Odstęp od lewej krawędzi */
-    padding-right: 50px; /* Odstęp od prawej krawędzi */
+    padding-left: 50px;
+    padding-right: 0; /* <--- KLUCZOWA ZMIANA: Zmieniamy na 0 */
 
     background-color: var(--bg-color);
     border-radius: var(--border-radius);
@@ -113,7 +119,10 @@ body {
     height: 100%; 
     overflow: hidden;
     border: none; 
-    border-radius: 30px; /* <--- NOWE: Zaokrąglenie rogów kontenera */
+    margin-bottom: 40px;
+    
+    /* KLUCZOWA ZMIANA: 30px z lewej, 0 z prawej */
+    border-radius: 30px 0 0 30px; 
 }
 
 .editorial-title {
@@ -160,6 +169,9 @@ body {
     object-fit: cover;
     filter: grayscale(100%);
     transition: 0.5s;
+    
+    /* KLUCZOWA ZMIANA: 30px z lewej, 0 z prawej */
+    border-radius: 30px 0 0 30px; 
 }
 .hero-img-side:hover .editorial-img { filter: grayscale(0%); transform: scale(1.05); }
 
@@ -877,5 +889,96 @@ body.spotlight-mode .service-row:not(.active-row) {
     .pricing-item:hover {
         /* Na telefonach lepiej wygląda delikatne uniesienie (translateY) niż mocne skalowanie */
         transform: translateY(-5px); 
+    }
+}
+/* =======================================================
+   WERSJA MOBILNA (SMARTFONY - np. iPhone)
+   ======================================================= */
+@media (max-width: 768px) {
+    
+    /* 1. NAGŁÓWEK I MENU */
+    .main-header {
+        padding-top: 20px;
+    }
+    .logo-img {
+        height: 150px; /* Znacznie mniejsze logo na telefonie */
+        margin-bottom: 20px;
+    }
+    .desktop-menu {
+        flex-wrap: wrap; /* Pozwala linkom zawijać się do nowej linii */
+        justify-content: center;
+        gap: 15px;
+        padding: 0 10px;
+    }
+    .desktop-menu a {
+        font-size: 0.9rem; /* Mniejsza czcionka w menu */
+    }
+
+    /* 2. SEKCJA HERO (Przestrzeń, Detal, Chwila) */
+    .hero-editorial {
+        grid-template-columns: 1fr; /* Elementy układają się jeden pod drugim */
+        margin-top: 20px; /* Usuwamy efekt wjeżdżania pod menu */
+        padding: 30px 20px; /* Znacznie mniejsze marginesy wewnętrzne */
+    }
+    .hero-text-side {
+        padding: 0 0 30px 0; /* Resetujemy marginesy tekstu */
+    }
+    .editorial-title {
+        font-size: 3.5rem; /* Mniejszy tytuł, żeby zmieścił się na ekranie */
+    }
+    .editorial-desc {
+        max-width: 100%;
+        text-align: left; /* Na telefonie lepiej czyta się tekst do lewej */
+    }
+    
+    /* Ukrywamy pionowy pasek, na telefonie zajmuje cenne miejsce */
+    .vertical-stripe {
+        display: none; 
+    }
+
+    /* 3. ZDJĘCIE W HERO */
+    .hero-img-side {
+        height: 350px; /* Sztywna wysokość zdjęcia na telefonie */
+        margin-bottom: 0;
+        /* Przywracamy równe zaokrąglenia ze wszystkich stron */
+        border-radius: 20px; 
+    }
+    .editorial-img {
+        border-radius: 20px;
+    }
+
+    /* 4. SEKCJA USŁUGI I CENNIK */
+    .section-title {
+        font-size: 2rem;
+    }
+    .pricing-grid {
+        gap: 20px;
+        background: transparent;
+        border: none;
+        border-radius: 0; /* Na telefonie rezygnujemy z zaokrąglonej siatki */
+    }
+    .pricing-item {
+        border: 1px solid #111;
+        border-radius: 20px;
+        padding: 30px 20px;
+    }
+
+    /* 5. SEKCJA O NAS */
+    .about-section {
+        padding: 40px 20px;
+        margin: 40px 10px; /* Mniejsze marginesy zewnętrzne */
+        border-radius: 20px;
+    }
+    .about-image {
+        height: 250px; /* Niższe zdjęcie */
+    }
+
+    /* 6. FORMULARZ KONTAKTOWY */
+    .contact-container {
+        grid-template-columns: 1fr; /* Formularz i dane jeden pod drugim */
+        gap: 40px;
+    }
+    .contact-form, .contact-info {
+        padding: 20px; /* Mniej pustej przestrzeni wewnątrz czarnych boksów */
     }
 }
