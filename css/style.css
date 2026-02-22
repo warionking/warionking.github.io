@@ -36,11 +36,11 @@ html {
 /* --- KLASA KONTENERA (RWD) --- */
 .container {
     width: 100%;
-    max-width: 1200px; /* Maksymalna szerokość treści */
+    max-width: 1600px; /* Zwiększono z 1200px, by strona "oddychała" na szerokich matrycach */
     margin-left: auto;
     margin-right: auto;
-    padding-left: 20px; /* Marginesy bezpieczeństwa na telefonach */
-    padding-right: 20px;
+    padding-left: clamp(20px, 4vw, 60px); /* Płynne marginesy: 20px na telefonie, rosną do 60px na PC */
+    padding-right: clamp(20px, 4vw, 60px);
 }
 /* --- TŁO GŁÓWNE --- */
 body {
@@ -78,21 +78,22 @@ body {
 
 /* --- POPRAWIONY NAVBAR (PODĄŻAJĄCY) --- */
 .desktop-menu {
-    position: sticky;       /* Pasek zacznie podążać dopiero po dotknięciu góry */
-    top: 20px;              /* Odstęp od góry ekranu po "przyklejeniu" */
+    position: sticky;       
+    top: 20px;              
     z-index: 9999;
     
     display: flex;
-    gap: 55px;               /* Zwiększyłem z 35px na 55px */
+    gap: 55px;               
     background-color: rgba(224, 224, 224, 0.9); 
-    padding: 12px 50px;      /* Zwiększyłem też boczny padding paska dla balansu */
+    padding: 12px 50px;      
     border-radius: 50px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     border: 1px solid rgba(0, 0, 0, 0.05);
     
-    /* KLUCZOWE DLA WYŚRODKOWANIA: */
-    width: fit-content;     /* Pasek zwęża się do zawartości */
-    margin: 0 auto 40px auto; /* Centruje w poziomie i daje odstęp od spodu */
+    width: fit-content;     
+    /* KLUCZOWA ZMIANA: Zmieniamy pierwszy parametr na ujemny, by podciągnąć menu do góry */
+    /* Jeśli chcesz, by pasek był jeszcze wyżej, zmień -30px na np. -50px */
+    margin: -30px auto 40px auto; 
     
     backdrop-filter: blur(8px);
     transition: all 0.3s ease;
@@ -920,38 +921,47 @@ body.spotlight-mode .service-row:not(.active-row) {
     display: block; 
     margin: 0 auto; /* Gwarantuje wycentrowanie logo */
 }
-.desktop-menu {
+/* NOWOŚĆ: Swipeable Pill Menu - przewijane palcem na boki */
+    .desktop-menu {
         display: flex;
-        justify-content: space-between; /* POPRAWA: Rozciąga linki równomiernie na całą szerokość paska */
+        justify-content: flex-start; /* Układamy od lewej */
         align-items: center;     
         background-color: #E0E0E0;
-        padding: 12px 22px;      /* POPRAWA: Większy padding boczny, by skrajne linki nie wchodziły na zaokrąglenia */
+        padding: 12px 20px;
         border-radius: 50px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         border: 1px solid rgba(0, 0, 0, 0.05);
+        gap: 25px;               /* Przywracamy ładny odstęp między linkami */
         
-        width: 94%;              
+        width: 90%;              /* Bezpieczna szerokość */
         max-width: 400px;        
         margin: 10px auto;       
-        transition: all 0.3s ease;
+        
+        /* KLUCZOWE: Pozwala na przewijanie zawartości, która wychodzi poza pasek */
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch; /* Płynne, kinetyczne przewijanie na iOS */
+        
+        /* Ukrywanie paska przewijania w Firefox i IE */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
     }
 
-    .desktop-menu:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    /* Ukrywanie paska przewijania w Chrome, Safari i na iOS */
+    .desktop-menu::-webkit-scrollbar {
+        display: none;
     }
 
     .desktop-menu a {
         text-decoration: none;
         color: #333333; 
         font-family: var(--font-heading);
-        font-size: clamp(0.75rem, 3.5vw, 0.95rem); /* POPRAWA: Zwiększona czcionka, by lepiej wypełnić pasek */
+        font-size: 13px;         /* Wracamy do czytelnego, większego rozmiaru! */
         text-transform: uppercase;
-        letter-spacing: 0px;     /* POPRAWA: Wyzerowany letter-spacing pozwala na większą czytelną literę */
         font-weight: bold;
         position: relative;
-        transition: 0.3s;
-        white-space: nowrap;     
+        white-space: nowrap;     /* Kategoryczny zakaz łamania słów do nowej linii */
+        flex-shrink: 0;          /* Kategoryczny zakaz zgniatania słów - zachowują swój pełny wymiar */
     }
 
 /* Zmieniamy kolor podkreślenia na Twój pomarańczowy, żeby nawiązać do reszty */
