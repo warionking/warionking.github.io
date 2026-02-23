@@ -240,3 +240,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+// FUNKCJA OBSŁUGI COOKIES - MUSI BYĆ GLOBALNA
+function acceptCookies() {
+    const pill = document.getElementById('cookie-pill');
+    if (pill) {
+        pill.style.opacity = '0';
+        pill.style.transform = 'translate(-50%, 20px)'; // Efekt opadania przy znikaniu
+        setTimeout(() => {
+            pill.style.display = 'none';
+        }, 500);
+        localStorage.setItem('cookies_accepted_v1', 'true');
+    }
+}
+
+// Sprawdzenie przy starcie (to może zostać wewnątrz DOMContentLoaded lub poza nim)
+if (localStorage.getItem('cookies_accepted_v1')) {
+    document.addEventListener("DOMContentLoaded", () => {
+        const pill = document.getElementById('cookie-pill');
+        if (pill) pill.style.display = 'none';
+    });
+}
