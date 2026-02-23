@@ -240,23 +240,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
-// FUNKCJA OBSŁUGI COOKIES - MUSI BYĆ GLOBALNA
-function acceptCookies() {
+function manageCookies(action) {
     const pill = document.getElementById('cookie-pill');
     if (pill) {
         pill.style.opacity = '0';
-        pill.style.transform = 'translate(-50%, 20px)'; // Efekt opadania przy znikaniu
-        setTimeout(() => {
-            pill.style.display = 'none';
-        }, 500);
-        localStorage.setItem('cookies_accepted_v1', 'true');
+        pill.style.transform = 'translate(-50%, 20px)';
+        setTimeout(() => { pill.style.display = 'none'; }, 500);
+        
+        if (action === 'accept') {
+            localStorage.setItem('cookies_accepted_v1', 'true');
+            // Tutaj ew. uruchomienie skryptów śledzących (GA4 itp.)
+        } else {
+            localStorage.setItem('cookies_rejected_v1', 'true');
+        }
     }
 }
 
-// Sprawdzenie przy starcie (to może zostać wewnątrz DOMContentLoaded lub poza nim)
-if (localStorage.getItem('cookies_accepted_v1')) {
-    document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem('cookies_accepted_v1') || localStorage.getItem('cookies_rejected_v1')) {
         const pill = document.getElementById('cookie-pill');
         if (pill) pill.style.display = 'none';
-    });
-}
+    }
+});

@@ -1,3 +1,15 @@
+/* WKLEJ NA SAMEJ GÓRZE PLIKU: */
+:root {
+  --primary-color: #2c3e50;
+  --accent-color: #3498db;
+  --bg-light: #f5f8ff;
+}
+
+/* FRAGMENT PO (Twoje pierwsze style): */
+body {
+  margin: 0;
+  background-color: var(--bg-light);
+}
 html {
     scroll-behavior: smooth;
 }
@@ -1263,4 +1275,15 @@ body.spotlight-mode .service-row:not(.active-row) {
         gap: 15px;
     }
     .cookie-pill-container p { white-space: normal; }
+}
+/* --- SEO HELPER --- */
+.seo-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
