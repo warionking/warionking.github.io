@@ -1136,10 +1136,11 @@ body.spotlight-mode .service-row:not(.active-row) {
         padding: 30px 20px;
     }
 
-   /* 5. SEKCJA O NAS */
+/* 5. SEKCJA O NAS - POPRAWIONE CENTROWANIE */
     .about-section {
         padding: 40px 20px;
-        margin: 40px 10px;       /* Mniejsze marginesy zewnętrzne */
+        /* auto sprawi, że blok idealnie zrówna się z blokiem Hero powyżej */
+        margin: 40px auto 20px auto; 
         border-radius: 20px;
     }
     
