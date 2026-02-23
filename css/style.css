@@ -44,13 +44,79 @@ html {
 }
 /* --- TŁO GŁÓWNE --- */
 body {
-    background-color: #E5E5E5; 
-    background-image: url("https://www.transparenttextures.com/patterns/stardust.png"); 
+    background-color: #E5E5E5; /* TYLKO szary kolor, bez stardustu! */
     color: var(--text-color);
     font-family: var(--font-body);
     overflow-x: hidden;
 }
 
+/* --- EFEKT 3D: KONTENER TŁA --- */
+.bg-blobs {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0; 
+    overflow: hidden;
+    pointer-events: none; 
+}
+
+/* 1. GWIEZDNY PYŁ (NA SAMEJ GÓRZE TŁA) */
+.noise-overlay {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+    z-index: 5; /* Pył przykrywa plamy */
+    pointer-events: none;
+}
+
+/* 2. PLAMY CIENIA (POD PYŁEM) */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px); 
+    animation: float-shadows 25s infinite ease-in-out alternate; 
+    z-index: 1; 
+}
+
+.blob-1 {
+    width: 600px; height: 600px;
+    background: #000000;
+    top: -10%; left: -10%;
+    opacity: 0.25; /* Znacznie zwiększona widoczność! */
+}
+
+.blob-2 {
+    width: 800px; height: 800px;
+    background: #222222;
+    bottom: -20%; right: -10%;
+    opacity: 0.20;
+    animation-delay: -5s; 
+}
+
+.blob-3 {
+    width: 500px; height: 500px;
+    background: #444444;
+    top: 40%; left: 50%;
+    opacity: 0.15;
+    animation-delay: -10s;
+}
+
+@keyframes float-shadows {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -30px) scale(1.05); }
+    100% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+/* --- PODNOSIMY ZAWARTOŚĆ STRONY NAD TŁO --- */
+main, .main-footer {
+    position: relative;
+    z-index: 20;
+}
 /* --- NAGŁÓWEK --- */
 .main-header {
     width: 100%;
@@ -126,6 +192,13 @@ body {
     display: flex;
     align-items: stretch;
     margin-top: 40px; 
+    
+    /* KLUCZOWA POPRAWKA: Precyzyjne wyrównanie szerokości do kafelków usług */
+    width: calc(100% - 40px); 
+    max-width: 1560px; /* 1600px z głównego kontenera MINUS 40px na boczne marginesy */
+    margin-left: auto;
+    margin-right: auto;
+
     background-color: var(--bg-color); 
     border-radius: var(--border-radius); 
     box-shadow: 0 25px 70px rgba(0, 0, 0, 0.08);
@@ -469,15 +542,16 @@ body.spotlight-mode .service-row.active-row .mini-slide {
 
 /* --- SEKCJA O MNIE --- */
 .about-section {
-    background-color: var(--text-color); /* Czarne tło */
+    background-color: var(--text-color); 
     color: white;
-    padding: 80px 50px; /* Równe odstępy wewnątrz */
+    padding: 80px 50px; 
     
-    /* Zmieniamy z pełnej szerokości na kartę */
-    max-width: 1200px; 
-    margin: 80px auto; /* Marginesy góra/dół i centrowanie na boki */
+    /* KLUCZOWA ZMIANA: Szerokość idealnie dopasowana do bloku Hero (1560px) */
+    width: calc(100% - 40px); 
+    max-width: 1560px; 
+    margin: 80px auto 20px auto;
     
-    border-radius: 30px; /* Zaokrąglenie spójne z resztą strony */
+    border-radius: 30px; 
     overflow: hidden; 
 }
 
@@ -485,10 +559,12 @@ body.spotlight-mode .service-row.active-row .mini-slide {
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
-    max-width: 1200px;
+    
+    /* KLUCZOWA ZMIANA: Pozwalamy zdjęciu i tekstom zająć całą szerokość karty */
+    max-width: 100%; 
     margin: 0 auto;
     position: relative;
-    z-index: 2; /* Treść nad tłem */
+    z-index: 2; 
 }
 .white-text { color: white; border-bottom: 2px solid white; display: inline-block; }
 .about-subtitle {
@@ -505,7 +581,7 @@ body.spotlight-mode .service-row.active-row .mini-slide {
 }
 .about-image {
     width: 100%;
-    height: 400px;
+    height: 420px;
     border: 2px solid white; 
     border-radius: var(--border-radius);
     overflow: hidden;
