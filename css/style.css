@@ -1053,11 +1053,14 @@ body.spotlight-mode .service-row:not(.active-row) {
     transition: width 0.3s;
 }
 
-   /* 2. SEKCJA HERO (Przestrzeń, Detal, Chwila) */
+  /* 2. SEKCJA HERO (Przestrzeń, Detal, Chwila) */
     .hero-editorial {
         flex-direction: column; 
         margin-top: 20px; 
         padding: 0 !important; 
+        
+        /* KLUCZOWA ZMIANA: Góra zaokrąglona (24px), dół ostry (0) */
+        border-radius: 24px 24px 0 0 !important; 
     }
     
     .hero-text-side {
@@ -1089,14 +1092,20 @@ body.spotlight-mode .service-row:not(.active-row) {
     }
 
     /* 3. ZDJĘCIE W HERO */
-    .hero-img-side {
-        height: 350px; /* Sztywna wysokość zdjęcia na telefonie */
+   .hero-img-side {
+        height: 350px; 
         margin-bottom: 0;
-        /* Przywracamy równe zaokrąglenia ze wszystkich stron */
-        border-radius: 20px; 
+        border-radius: 0; /* Usuwamy zaokrąglenie z kontenera */
+        overflow: hidden;
     }
-    .editorial-img {
-        border-radius: 20px;
+
+   .editorial-img {
+        /* Filmik na dole będzie teraz idealnie ostry i dopasowany do dołu karty */
+        border-radius: 0 !important; 
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
     }
 
   /* 4. SEKCJA USŁUGI I CENNIK */
