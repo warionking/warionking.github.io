@@ -1296,43 +1296,50 @@ body.spotlight-mode .service-row:not(.active-row) {
     margin-bottom: 25px;
 }
 /* =======================================================
-   STYLIZACJA LISTY - ZAMIANA KROPEK NA KRESKI
+   STYLIZACJA LISTY - GLOBALNA NAPRAWA (iOS & DESKTOP)
    ======================================================= */
 
+/* 1. Usunięcie domyślnych kropek (Safari Fix) */
 .service-details {
-    list-style: none !important; /* To całkowicie usuwa czarne kropki */
+    list-style-type: none !important;
+    list-style: none !important;
     padding: 0 !important;
     margin: 30px 0 !important;
-    border-top: 1px solid rgba(0, 0, 0, 0.05); /* Bardzo subtelna linia oddzielająca */
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
     padding-top: 20px !important;
+    -webkit-padding-start: 0 !important; /* Wymuszenie dla iPhone */
 }
 
+/* 2. Stylizacja elementów listy */
 .service-details li {
     position: relative;
-    padding-left: 30px !important; /* Miejsce na nową kreskę */
+    padding-left: 30px !important;
     margin-bottom: 15px !important;
     font-size: 0.95rem;
     color: #444;
-    text-align: left;
+    text-align: left !important;
     line-height: 1.4;
+    display: block !important; /* Safari Fix */
 }
 
-/* Tworzymy nową ikonę: minimalistyczna pozioma kreska */
+/* 3. Tworzenie kresek zamiast kropek */
 .service-details li::before {
-    content: "";
+    content: "" !important;
     position: absolute;
     left: 0;
-    top: 10px; /* Centrowanie w pionie względem tekstu */
-    width: 15px; /* Długość kreski */
-    height: 2px; /* Grubość kreski */
-    background-color: var(--accent-color); /* Używa Twojego koloru #FF2A00 */
-    transition: all 0.3s ease;
+    top: 10px;
+    width: 15px;
+    height: 2px;
+    background-color: var(--accent-color);
+    display: block !important;
 }
 
-/* EFEKT HOVER: Kreska wydłuża się, gdy najedziesz myszką na punkt listy */
-.service-details li:hover::before {
-    width: 25px;
-    background-color: #000; /* Kreska zmienia kolor na czarny przy najechaniu */
+/* 4. Efekt po najechaniu (tylko na urządzeniach z myszką) */
+@media (hover: hover) {
+    .service-details li:hover::before {
+        width: 25px;
+        background-color: #000;
+    }
 }
 
 .service-details li strong {
@@ -1341,4 +1348,16 @@ body.spotlight-mode .service-row:not(.active-row) {
     text-transform: uppercase;
     font-size: 0.85rem;
     letter-spacing: 0.5px;
+}
+
+/* 5. SEO Helper na samym końcu */
+.seo-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
